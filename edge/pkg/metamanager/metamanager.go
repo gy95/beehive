@@ -1,6 +1,7 @@
 package metamanager
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/astaxie/beego/orm"
@@ -64,6 +65,8 @@ func (m *metaManager) Enable() bool {
 }
 
 func (m *metaManager) Start() {
+	fmt.Println("===================================================")
+	fmt.Println(metaserverconfig.Config.Enable)
 	if metaserverconfig.Config.Enable {
 		imitator.StorageInit()
 		go metaserver.NewMetaServer().Start(beehiveContext.Done())
