@@ -23,12 +23,16 @@ import (
 	beehiveContext "github.com/kubeedge/beehive/pkg/core/context"
 	"github.com/kubeedge/beehive/pkg/core/model"
 	commodule "github.com/kubeedge/kubeedge/edge/pkg/common/modules"
+	metaManagerConfig "github.com/kubeedge/kubeedge/edge/pkg/metamanager/config"
+	"github.com/kubeedge/kubeedge/pkg/apis/componentconfig/edgecore/v1alpha1"
 )
 
 // metaModule is metamanager implementation of Module interface
 var metaModule core.Module
 
 func init() {
+	cfg := v1alpha1.NewDefaultEdgeCoreConfig()
+	metaManagerConfig.InitConfigure(cfg.Modules.MetaManager)
 	beehiveContext.InitContext(beehiveContext.MsgCtxTypeChannel)
 	beehiveContext.AddModule(MetaManagerModuleName)
 }
